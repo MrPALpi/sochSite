@@ -45,10 +45,10 @@
             @click="createPost"
             style="margin-top: 15px;"
             >Создать</MyButton>
-            <MyButton
+            <!-- <MyButton
             @click="fileText"
             style="margin-top: 15px;"
-            >вывести файл</MyButton>
+            >вывести файл</MyButton> -->
             
         </form>
     </div>

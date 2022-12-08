@@ -68,7 +68,7 @@ export default {
 .wrapper{
 
     display:flex;
-    max-width: 700px;
+    width: 700px;
     overflow: hidden;
     /* margin: 0 auto; */
     position: relative;

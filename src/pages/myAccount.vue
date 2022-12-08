@@ -1,4 +1,5 @@
 <template>
+  <div v-if="globalAuthor">
     <div>
       <MyDialog v-model:show="changeVisible">
         <ChangeReport
@@ -7,7 +8,7 @@
         />
       </MyDialog>
     </div>
-    <div class="gridReport" v-if="globalAuthor">
+    <div class="gridReport">
      
       <div class="box4">
         <MyPage :card="globalAuthor"></MyPage>
@@ -21,6 +22,10 @@
         />
       </div>
     </div>
+  </div>
+  <div v-else>
+    <h1 style="color:#fff;"> Идёт подтверждение пользователя </h1>
+  </div>
   </template>
   
   <script>
@@ -60,7 +65,7 @@
   
       changeReport(Report) {
         console.log("Сработало изменение");
-        // this.changeVisible = false;
+        this.changeVisible = false;
         this.changeReportMutations(Report);
       },
     },
@@ -78,6 +83,8 @@
       }),
     },
   };
+
+
   </script>
   
   <style></style>

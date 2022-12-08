@@ -10,7 +10,7 @@
   <div class="gridReport" v-if="getReportByUuid(this.$route.params.id)">
     <div class="box2">
       <ChangeReport
-        class="box2"
+        
         :mustChangeReport="getReportByUuid(this.$route.params.id)"
         @changeReport="changeReport"
       />

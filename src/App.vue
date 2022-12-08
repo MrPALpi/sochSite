@@ -11,10 +11,19 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-
+import {  mapActions,  } from "vuex";
 // import NavBar from './components/NavBar.vue'
     export default{
-    components: { NavBar }
+    components: { NavBar },
+    beforeMount() {
+        console.log('моунтед работает');
+        this.getUser();    
+    },
+    methods: {
+    ...mapActions({
+      getUser: "report/localStorageCheck",
+    }),
+}
 }     
 </script>
 <style>

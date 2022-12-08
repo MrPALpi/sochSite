@@ -15,9 +15,8 @@
 :imgPath="`https://www.erase.bg/static/assets/images/gradient.842ff9b.svg`">
 
 <div class="inline_bloks">
-    <div class="text_padding">
+    <!-- <div class="text_padding"> -->
 
-        
 <h3>Настолько пафосны, насколько и нелепые/глупые
 Королеве плевать, что говорят за ее спиной мыши
 Мн плевать, что вы обо мне думаете, я о вас не думаю вообще
@@ -29,7 +28,7 @@
 Пока ты с подружками обсуждаешь , какая я развратная и пошлая, твой парень дрочит на моё фото...
 Короче, все в стиле "я два дня за вами бежала, чтобы сказать, как мне пофиг"</h3>
 
-</div>
+<!-- </div> -->
 <myCarusel :carusel_data="sliderItems"></myCarusel>
 </div>
 </heroBlock>
