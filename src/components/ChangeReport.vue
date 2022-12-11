@@ -39,8 +39,11 @@
     >
 
     <MyButton
-      style="margin: 15px 0px 0px 10px">
-      <a v-bind:href="`/roma/api/get_file/` + report.path"> Скачать </a></MyButton>
+      style="margin: 15px 0px 0px 10px"
+      @click="download">
+      Скачать
+      <!-- <a v-bind:href="`/roma/api/get_file/` + report.path"> Скачать </a> -->
+    </MyButton>
   </form>
 </template>
 
@@ -48,6 +51,7 @@
 import MyInput from "./UI/MyInput.vue";
 // import axios from "axios";
 import _ from "lodash";
+import { mapState} from "vuex";
 
 export default {
   data() {
@@ -64,16 +68,7 @@ export default {
         note: this.mustChangeReport.note,
         doc_uuid: this.mustChangeReport.doc_uuid,
       },
-      // mustSentReport:{
-      // },
-      // names : [
-      //         {value: '174ccd93-9170-497a-9ecf-3632e13e846d', name: "Даниил"}, //"174ccd93-9170-497a-9ecf-3632e13e846d"
-      //         {value: "d77af4cf-0136-4cce-9873-7f11309aeceb", name: "Роман"},
-      //         {value: "1501dd0f-ba3e-4716-a263-d4ba1ca018fb", name: "Александр"},
-      //         {value: "cf040460-0a8b-4178-aaa7-4e9f1c7607fc", name: "Андрей"},
-      //         {value: "cf040460-0ddb-4178-aaa7-4ne41c7607fc", name: "Матвей"},
 
-      //     ]
     };
   },
   props: {
@@ -83,8 +78,16 @@ export default {
     },
   },
   methods: {
+    download(){
+      if(this.globalAuthor){ 
+      window.open(`/roma/api/get_file/${this.report.path}`, '_blank');
+      }
+      else{
+        alert("У вас недостаточно прав, пожалуйста авторизируйтесь")
+      }
+    },
     changePost() {
-     
+      if(this.globalAuthor){ 
       if (!this.report.title == "") {
         if (_.isEqual(this.report, this.mustChangeReport)) {
 
@@ -103,11 +106,15 @@ export default {
             }
             
           }
-          console.log(sendReport);
+          // console.log(sendReport);
           this.$emit("changeReport", sendReport);
         }
 
       }
+    }
+    else{
+            alert("У вас недостаточно прав, пожалуйста авторизируйтесь")
+        }
     },
     handleFileUpload() {
       this.file = event.target.files[0];
@@ -123,7 +130,11 @@ export default {
     //   }
     // },
   },
-
+  computed: {
+    ...mapState({
+        globalAuthor: (state) => state.report.globalAuthor,
+    }),
+  },
   watch: {
     mustChangeReport: function (data) {
       console.log("ватч работает", data);

@@ -22,7 +22,8 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: stretch; */
-
+    
+    /* margin-top: 50px; */
     width: 100% auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -86,15 +87,23 @@ a{
 }
 
 .btn:hover {
-    /* text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 40px #ff00de, 0 0 80px #ff00de, 0 0 90px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de; */
-    animation: neon1 1s ease-in-out infinite alternate;
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 40px #ff00de, 0 0 80px #ff00de, 0 0 90px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+    /* animation: neon1 1s ease-in-out infinite alternate; */
     color: #fff;
     border: 2px solid #fff;
     background-color: #101112;
 
 
 }
-
+#download{
+    align-self: flex-end;
+    padding: 0px;
+   
+    border: 0px;
+    background-color: transparent;
+    border-radius: 0px;
+  
+}
 
 @keyframes neon1 {
     from {
@@ -191,8 +200,9 @@ a{
 
 .post_btns {
     /* display: flex; */
-    width: 250px;
-    display: inline-block;
+    max-width: 250px;
+    display: grid;
+    grid-gap: 2px;
 
     /* align-items: center; *
     /* justify-content: space-between; */
@@ -292,7 +302,7 @@ select {
 }
 
 .gridReport {
-    margin: 0 40px 0 40px;
+    margin: 0 15px 0 15px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 100px 100px;

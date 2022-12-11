@@ -1,24 +1,24 @@
 <template>
   <div id="navbar" class="Navbar">
     <div class="navbar_btns">
-      <MyButton @click="$router.push('/reports')"> Базы данных </MyButton>
+      <!-- <MyButton @click="$router.push('/reports')"> Базы данных </MyButton> -->
       <MyButton @click="$router.push('/')" style="margin-left: 20px">
         О нас
       </MyButton>
       <MyButton v-if="globalAuthor" @click="$router.push(`/mypage/${globalAuthor.uuid}`)" style="margin-left: 20px"> Профиль </MyButton>
       <MyButton v-else @click="$router.push('/account')" style="margin-left: 20px"> Авторизация </MyButton>
-      <MyButton @click="$router.push('/store')" style="margin-left: 20px"> Store </MyButton>
+      <MyButton @click="$router.push('/reports')" style="margin-left: 20px"> Базы данных </MyButton>
     </div>
   </div>
   <div class="Navbar">
     <div class="navbar_btns">
-      <MyButton @click="$router.push('/reports')"> Базы данных </MyButton>
+      <!-- <MyButton @click="$router.push('/reports')"> Базы данных </MyButton> -->
       <MyButton @click="$router.push('/')" style="margin-left: 20px">
         О нас
       </MyButton>
       <MyButton v-if="globalAuthor" @click="$router.push(`/mypage/${globalAuthor.uuid}`)" style="margin-left: 20px"> Профиль </MyButton>
       <MyButton v-else @click="$router.push('/account')" style="margin-left: 20px"> Авторизация </MyButton>
-      <MyButton @click="$router.push('/store')" style="margin-left: 20px"> Store </MyButton>
+      <MyButton @click="$router.push('/reports')" style="margin-left: 20px"> Базы данных </MyButton>
     </div>
   </div>
 </template>

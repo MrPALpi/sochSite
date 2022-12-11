@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
 import MainPage from "@/pages/MainPage";
 import usersPosts from "@/pages/usersPosts";
-import ourWorks from "@/pages/ourWorks.vue";
+// import ourWorks from "@/pages/ourWorks.vue";
 import ourWorksWithX from "@/pages/ourWorksWithX";
 import reportDoc_uuid from "@/pages/reportDoc_uuid";
 import AuthPage from "@/pages/AuthPage";
@@ -14,7 +14,7 @@ const routes =  [
     },
     {
         path: '/reports',
-        component: ourWorks
+        component: ourWorksWithX
     },
     {
         path: '/works',
@@ -24,10 +24,10 @@ const routes =  [
         path: '/reports/:id',
         component: reportDoc_uuid
     },
-    {
-        path: '/store',
-        component: ourWorksWithX
-    },
+    // {
+    //     path: '/store',
+    //     component: ourWorksWithX
+    // },
     {
         path: '/account',
         component: AuthPage

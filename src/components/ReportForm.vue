@@ -25,7 +25,7 @@
 
             <MyInput 
             v-model:value="report.number_work"
-            type="text"
+            type="number"
             placeholder="Номер работы"></MyInput>
 
 
@@ -72,13 +72,10 @@ export default {
     },
     methods: {
         createPost() {
-            // console.log("Автор до",this.report.author);
+            if(this.globalAuthor){
 
             this.sendFile(this.report,this.file);
-            // console.log("wtf",this.report.author);
-            // this.getUser(this.report,this.report.author_uuid);
 
-            // console.log("коченный?",this.globalAuthor, this.report.author);
             if (!this.report.title == "") {
                 this.$emit("create", this.report);
                 this.report = {
@@ -91,9 +88,12 @@ export default {
                     note:"",
                     doc_uuid:""
                 };
-                console.log("wtf",this.report.author);
-                // this.$emit('sendFile');
+ 
             }
+        }
+        else{
+            alert("У вас недостаточно прав, пожалуйста авторизируйтесь")
+        }
         },
         handleFileUpload(){
           this.file = event.target.files[0];
@@ -132,18 +132,7 @@ export default {
                 }
                 
         },
-        // async getUser(report,user){
-        //         try{
-        //             await axios.get(`roma/api/get?user.uuid=${user}`)
-        //             .then(response => report.author=response['data']['users'][0]);
-        //             console.log("ТУЧЕ", report.author);
-        //             // this.report.author = response['data']['users'][0];
-                    
-        //         }
-        //         catch (e){
-        //             alert('Error')
-        //         }
-        // },
+
         nameSlice(atribut){
             let s=''
             switch(atribut){

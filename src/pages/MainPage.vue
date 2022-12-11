@@ -6,18 +6,20 @@
 :imgPath="`https://catherineasquithgallery.com/uploads/posts/2021-02/1612168049_164-p-fon-dlya-rabochego-stola-fioletovii-neon-238.jpg`"/> -->
 <!-- :imgPath="`https://catherineasquithgallery.com/uploads/posts/2021-02/1612168049_164-p-fon-dlya-rabochego-stola-fioletovii-neon-238.jpg`" -->
 <heroBlock
-:imgPath="require('../assets/images/back.jpg')"
+:imgPath="require(`../assets/images/back.jpg`)"
 >
+
 <heroText :heroTexts="`Juicy squad Is Here`"></heroText>
 </heroBlock>
 
 <heroBlock
-:imgPath="`https://www.erase.bg/static/assets/images/gradient.842ff9b.svg`">
+:imgPath="`https://www.erase.bg/static/assets/images/gradient.842ff9b.svg`"
+>
 
 <div class="inline_bloks">
     <!-- <div class="text_padding"> -->
 
-<h3>Настолько пафосны, насколько и нелепые/глупые
+<!-- <h3>Настолько пафосны, насколько и нелепые/глупые
 Королеве плевать, что говорят за ее спиной мыши
 Мн плевать, что вы обо мне думаете, я о вас не думаю вообще
 Если я вас напрягаю или раздражаю, то вы всегда можете забиться в углу и поплакать.
@@ -26,7 +28,7 @@
 Моя вина лишь в том, что я красива, слегка распущена, ранима и вольна...Но никого лучше не найдешь меня
 Татуировок у меня нет, потому что нормальному человеку и в голову не придет лепить наклейки на Роллс-Ройс.
 Пока ты с подружками обсуждаешь , какая я развратная и пошлая, твой парень дрочит на моё фото...
-Короче, все в стиле "я два дня за вами бежала, чтобы сказать, как мне пофиг"</h3>
+Короче, все в стиле "я два дня за вами бежала, чтобы сказать, как мне пофиг"</h3> -->
 
 <!-- </div> -->
 <myCarusel :carusel_data="sliderItems"></myCarusel>
