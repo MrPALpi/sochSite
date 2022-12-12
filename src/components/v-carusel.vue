@@ -2,7 +2,8 @@
 
   <div class="wrapper">
     
-    <div class="v-carusel"  :style="{'margin-left': '-' + (100*this.currentSlideIndex) + '%'}">
+    <div  class="v-carusel"  :style="{'margin-left': '-' + (100*this.currentSlideIndex) + '%'}">
+        <!-- <div ref="carusel" class="v-carusel" > -->
     <vCaruselItem
     v-for="item in carusel_data"
     :key="item.id"
@@ -56,6 +57,7 @@ export default {
             }
             else{
                 this.currentSlideIndex++;
+                // this.$refs.carusel.style.margin = `-${this.currentSlideIndex}*${this.$refs.carusel.clientWidth})px,0,0`;
             }
         }
     },
@@ -70,9 +72,9 @@ export default {
     display:flex;
     width: 700px;
     overflow: hidden;
-    /* margin: 0 auto; */
+
     position: relative;
-    /* margin-bottom: -20px; */
+    
 
 }
 .v-carusel{
@@ -98,14 +100,12 @@ export default {
 }
 
 .carousel__prev {
-  /* top: 50%; */
   left: 22%;
   transform: translate(-50%, -50%);
   
 }
 
 .carousel__next {
-  /* top: 50%; */
   right: 22%;
   transform: translate(50%, -50%);
 }

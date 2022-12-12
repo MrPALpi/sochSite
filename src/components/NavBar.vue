@@ -1,24 +1,24 @@
 <template>
-  <div id="navbar" class="Navbar">
+  <div id="navbar-vue" class="Navbar-vue">
     <div class="navbar_btns">
       <!-- <MyButton @click="$router.push('/reports')"> Базы данных </MyButton> -->
-      <MyButton @click="$router.push('/')" style="margin-left: 20px">
+      <MyButton @click="$router.push('/')" style="margin-right: 10px">
         О нас
       </MyButton>
-      <MyButton v-if="globalAuthor" @click="$router.push(`/mypage/${globalAuthor.uuid}`)" style="margin-left: 20px"> Профиль </MyButton>
-      <MyButton v-else @click="$router.push('/account')" style="margin-left: 20px"> Авторизация </MyButton>
-      <MyButton @click="$router.push('/reports')" style="margin-left: 20px"> Базы данных </MyButton>
+      <MyButton v-if="globalAuthor" @click="$router.push(`/mypage/${globalAuthor.uuid}`)" style="margin-right: 10px"> Профиль </MyButton>
+      <MyButton v-else @click="$router.push('/account')" style="margin-right: 10px"> Авторизация </MyButton>
+      <MyButton @click="$router.push('/reports')" style="margin-right: 0px"> Базы данных </MyButton>
     </div>
   </div>
-  <div class="Navbar">
+  <div class="Navbar-vue">
     <div class="navbar_btns">
       <!-- <MyButton @click="$router.push('/reports')"> Базы данных </MyButton> -->
-      <MyButton @click="$router.push('/')" style="margin-left: 20px">
+      <MyButton @click="$router.push('/')" style="margin-right: 10px">
         О нас
       </MyButton>
-      <MyButton v-if="globalAuthor" @click="$router.push(`/mypage/${globalAuthor.uuid}`)" style="margin-left: 20px"> Профиль </MyButton>
-      <MyButton v-else @click="$router.push('/account')" style="margin-left: 20px"> Авторизация </MyButton>
-      <MyButton @click="$router.push('/reports')" style="margin-left: 20px"> Базы данных </MyButton>
+      <MyButton v-if="globalAuthor" @click="$router.push(`/mypage/${globalAuthor.uuid}`)" style="margin-right: 10px"> Профиль </MyButton>
+      <MyButton v-else @click="$router.push('/account')" style="margin-right: 10px"> Авторизация </MyButton>
+      <MyButton @click="$router.push('/reports')" style="margin-right: 0px"> Базы данных </MyButton>
     </div>
   </div>
 </template>
@@ -40,9 +40,9 @@ export default {
         document.body.scrollTop > 150 ||
         document.documentElement.scrollTop > 150
       ) {
-        document.getElementById("navbar").style.top = "0";
+        document.getElementById("navbar-vue").style.top = "0";
       } else {
-        document.getElementById("navbar").style.top = "-150px";
+        document.getElementById("navbar-vue").style.top = "-150px";
       }
     }
   },

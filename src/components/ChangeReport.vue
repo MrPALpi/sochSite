@@ -80,7 +80,7 @@ export default {
   methods: {
     download(){
       if(this.globalAuthor){ 
-      window.open(`/roma/api/get_file/${this.report.path}`, '_blank');
+      window.open(`/api/get_file/${this.report.path}`, '_blank');
       }
       else{
         alert("У вас недостаточно прав, пожалуйста авторизируйтесь")

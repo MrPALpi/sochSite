@@ -2,7 +2,7 @@
   <div class="ProfileRedesign">
     <div class="ProfileCover"></div>
     <div class="Avatar">
-        <img class="imgCard"  v-bind:src="`/roma/api/get_file/`+card.avatar" alt="">
+        <img class="imgCard"  v-bind:src="`/api/get_file/`+card.avatar" alt="">
     </div>
     <div class="info">
         <h1>Имя: {{card.name}}</h1>

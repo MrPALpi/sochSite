@@ -10,11 +10,13 @@
                     <img :src="require('./picthers/file.svg')" alt="Панда" >
                 </a> -->
       <!-- </div> -->
-      <div><strong> Название: </strong> {{ report.title }}</div>
-      <div><strong> Предмет: </strong> {{ report.subject }}</div>
-      <div><strong> Тип работы: </strong> {{ report.type_work }}</div>
-      <div><strong> Номер работы: </strong> {{ report.number_work }}</div>
-      <div><strong> Автор: </strong> {{ report.author.name }}</div>
+      <div class="reportInfo">
+      <div ><strong> Название: </strong> {{ report.title }}</div>
+      <div ><strong> Предмет: </strong> {{ report.subject }}</div>
+      <div ><strong> Тип работы: </strong> {{ report.type_work }}</div>
+      <div ><strong> Номер работы: </strong> {{ report.number_work }}</div>
+      <div ><strong> Автор: </strong> {{ report.author.name }}</div>
+    </div>
     </div>
     <!-- $router.push(`reports/${report.doc_uuid}`)" -->
     <div class="post_btns">
@@ -50,7 +52,7 @@ export default {
   methods: {
     download(){
       if(this.globalAuthor){ 
-      window.open(`/roma/api/get_file/${this.report.path}`, '_blank');
+      window.open(`/api/get_file/${this.report.path}`, '_blank');
       }
       else{
         alert("У вас недостаточно прав, пожалуйста авторизируйтесь")

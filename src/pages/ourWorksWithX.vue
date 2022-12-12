@@ -11,7 +11,7 @@
     </MyInput>
 
     <div class="app_btns">
-      <MyButton @click="showDialog">Создать пост</MyButton>
+      <MyButton @click="showDialog">Создать отчёт</MyButton>
 
       <MySelect
         :model-value="selectedSort"

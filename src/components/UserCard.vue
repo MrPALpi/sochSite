@@ -1,7 +1,7 @@
 <template>
   <div class ="UserCard">
         <div  class="imgCardWrap">
-            <img class="imgCard"  v-bind:src="`/roma/api/get_file/`+card.avatar" alt="">
+            <img class="imgCard"  v-bind:src="`/api/get_file/`+card.avatar" alt="">
         </div>
         <div class="cardInfo" >
             <h4>{{card.name}}</h4>

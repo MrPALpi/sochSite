@@ -79,14 +79,14 @@ export const reportModule = {
       state.selectedSort = selectedSort;
     },
     setSearchQuery(state, searchQuery) {
-      console.log("должно работать");
+
       state.searchQuery = searchQuery;
     },
     setTotalPages(state, totalPages) {
       state.totalPage = totalPages;
     },
     removeReport(state, report) {
-      console.log("BlyatSUKA");
+     
       state.reports = state.reports.filter((p) => p !== report);
     },
     changeReport(state, report) {
@@ -100,10 +100,10 @@ export const reportModule = {
         changedReport[key] = report[key];
         formData.append(key, report[key]);
       }
-    
+
       try {
         axios.put(
-          `/roma/api/update_doc?doc_uuid=${changedReport.doc_uuid}`,
+          `/api/update_doc?doc_uuid=${changedReport.doc_uuid}`,
           formData,
           {
             headers: {
@@ -121,7 +121,7 @@ export const reportModule = {
       console.log(uuid);
       try {
         await axios
-          .get(`/roma/api/get?user.uuid=${uuid}`)
+          .get(`/api/get?user.uuid=${uuid}`)
           .then(
             (response) => (
               console.log("ЫЫЫ", response["data"]["users"][0]),
@@ -144,7 +144,7 @@ export const reportModule = {
           commit("setLoading", true);
 
           const response = await axios.get(
-            `/roma/api/get?doc.author.uuid=${uuid}`
+            `/api/get?doc.author.uuid=${uuid}`
           );
           commit("setReports", response["data"]["docs"]);
         } catch (e) {
@@ -165,7 +165,7 @@ export const reportModule = {
         try {
           commit("setLoading", true);
 
-          const response = await axios.get("/roma/api/get?all_docs");
+          const response = await axios.get("/api/get?all_docs");
           commit("setReports", response["data"]["docs"]);
         } catch (e) {
           console.log(e);
@@ -176,11 +176,11 @@ export const reportModule = {
     },
     async Auth({ commit, dispatch }, nickName) {
       try {
-        let response = await axios.get(`/roma/auth?nickname=${nickName}`);
+        let response = await axios.get(`/auth?nickname=${nickName}`);
         // this.$router.push('/store');
         while (response["data"]["result"] == false) {
           setTimeout(500);
-          response = await axios.get(`/roma/auth?nickname=${nickName}`);
+          response = await axios.get(`/auth?nickname=${nickName}`);
           // console.log(response['data']['user']);
         }
         commit("setGlobalAuthor", response["data"]["user"]);
@@ -194,7 +194,7 @@ export const reportModule = {
     async removeReport({ commit }, report) {
       try {
         commit("removeReport", report);
-        await axios.delete(`/roma/api/del_doc?doc_uuid=${report.doc_uuid}`);
+        await axios.delete(`/api/del_doc?doc_uuid=${report.doc_uuid}`);
       } catch (e) {
         alert("Error");
       }
@@ -203,7 +203,7 @@ export const reportModule = {
       console.log("ПОШЁЛ ЗАПУСК");
       try {
         commit("setLoading", true);
-        const response = await axios.get("/roma/api/get?all_docs");
+        const response = await axios.get("/api/get?all_docs");
         commit("setReports", response["data"]["docs"]);
       } catch (e) {
         console.log(e);
@@ -220,7 +220,7 @@ export const reportModule = {
     async loadMoreReports({ state, commit }) {
       try {
         // this.page +=1;
-        const response = await axios.get("/roma/api/get?all_docs", {});
+        const response = await axios.get("/api/get?all_docs", {});
         // this.totalPage = Math.ceil(response.headers['x-total-count']/this.limit);
         commit("setReports", [...state.reports, ...response.data.docs]);
         // this.reports = [...this.reports, ...response.data.docs];

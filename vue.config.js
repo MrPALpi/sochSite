@@ -4,22 +4,22 @@ module.exports = defineConfig({
   devServer: {
     // proxy: 'https://xn--i1ahcl5aza.xyz/'
     proxy:{
-      // "^/auth":{
-      //   target  : 'https://xn--i1ahcl5aza.xyz/auth/',
-      //   changeOrigin  : true,
-      //   pathRewrite: {'^/roma/auth' : ''}
-      // },
-      // "^/api":{
-      //   target  : 'https://xn--i1ahcl5aza.xyz/api/',
-      //   changeOrigin  : true,
-      //   pathRewrite: {'^/roma/api' : ''}
-      // },
-      "^/":{
-        target  : 'https://xn--i1ahcl5aza.xyz/',
+      "^/auth":{
+        target  : 'https://xn--i1ahcl5aza.xyz/auth/',
         changeOrigin  : true,
-        ws: false,
-        pathRewrite: {'^/roma/' : ''}
+        pathRewrite: {'^/auth' : ''}
       },
+      "^/api":{
+        target  : 'https://xn--i1ahcl5aza.xyz/api/',
+        changeOrigin  : true,
+        pathRewrite: {'^/api' : ''}
+      },
+      // "^/":{
+      //   target  : 'https://xn--i1ahcl5aza.xyz/',
+      //   changeOrigin  : true,
+      //   ws: false,
+      //   pathRewrite: {'^/roma/' : ''}
+      // },
       // "^/roma":{
       //   target  : 'https://xn--i1ahcl5aza.xyz/',
       //   changeOrigin  : true,
