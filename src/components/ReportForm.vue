@@ -117,7 +117,7 @@ export default {
                 formData.append('note','');
               
                 try{
-                    const response = await axios.post('roma/api/add_doc',
+                    const response = await axios.post('/api/add_doc',
                     formData,
                     {
                 headers: {
