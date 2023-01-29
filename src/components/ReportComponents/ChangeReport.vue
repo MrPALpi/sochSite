@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import MyInput from "./UI/MyInput.vue";
+import MyInput from "../UI/MyInput.vue";
 // import axios from "axios";
 import _ from "lodash";
 import { mapState} from "vuex";
@@ -78,13 +78,25 @@ export default {
     },
   },
   methods: {
-    download(){
+    async download(){
       if(this.globalAuthor){ 
-      window.open(`/api/get_file/${this.report.path}`, '_blank');
+      const response = await fetch(`/api/get_file/${this.report.path}`);
+        if (response.status === 200){
+          console.log(this.report)
+          const blob = await response.blob();
+          console.log(blob);
+          const downloadURL=window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = downloadURL;
+          link.download = this.report.title + this.report.path.slice(this.report.path.indexOf("."),);
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        }
       }
       else{
         alert("У вас недостаточно прав, пожалуйста авторизируйтесь")
-      }
+      }  
     },
     changePost() {
       if(this.globalAuthor){ 

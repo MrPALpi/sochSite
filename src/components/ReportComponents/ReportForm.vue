@@ -48,15 +48,13 @@
 </template>
 
 <script>
-import MyInput from "./UI/MyInput.vue";
-import uploadFile from '@/components/v-uploadFile.vue';
+import MyInput from "../UI/MyInput.vue";
+import uploadFile from '../UI/v-uploadFile.vue';
 import axios from "axios";
 import { mapState} from "vuex";
 export default {
     data() {
         return {
-    
-
             report:{
                 title:"",
                 path:"",
@@ -125,10 +123,11 @@ export default {
                 }
                 })
                 // .then(response => this.report.path=this.filePath+response)
-                    report.path = response['data'];
-                    report.doc_uuid = response['data'].slice(0,response['data'].indexOf("."));
+                    report.path = response['data']['Allowed'];
+                    // console.log("PLS SEMPAII",response['data']['Allowed']);
+                    report.doc_uuid = response['data']['Allowed'].slice(0,response['data']['Allowed'].indexOf("."));
                 }catch(err){
-                    console.log("AAA",err.code);
+                    console.log("AAA",err);
                 }
                 
         },
@@ -150,9 +149,7 @@ export default {
                 break;
             }
             return s;
-            
-                
-            
+     
         }
     },
     computed: {
@@ -160,7 +157,6 @@ export default {
         globalAuthor: (state) => state.report.globalAuthor,
     }),
   },
-
     components: { MyInput,
         uploadFile,}
 }

@@ -17,7 +17,7 @@
         <h1>Мои работы:</h1>
         <ReportList
           :reports="
-            reportsByAuthorUuid(this.$route.params.id)"
+            reportsByAuthorNickname(this.$route.params.id)"
           @OpenChangeReport="OpenChangeReport"
         />
       </div>
@@ -29,9 +29,9 @@
   </template>
   
   <script>
-  import ChangeReport from "@/components/ChangeReport.vue";
-  import MyPage from "@/components/MyPage.vue";
-  import ReportList from "@/components/ReportList.vue";
+  import ChangeReport from "@/components/ReportComponents/ChangeReport.vue";
+  import MyPage from "@/components/CosmeticLocation/MyPage.vue";
+  import ReportList from "@/components/ReportComponents/ReportList.vue";
   import MyDialog from "@/components/UI/MyDialog.vue";
   import { mapState, mapGetters, mapActions,mapMutations} from "vuex";
   
@@ -51,7 +51,7 @@
     },
     methods: {
       ...mapActions({
-        reportsByAuthorUuidAction: "report/reportsByAuthorUuidAction",
+        reportsByAuthorNicknameAction: "report/reportsByAuthorNicknameAction",
         getGlobalAuthorByUuid: "report/getGlobalAuthorByUuid", 
       }),
       ...mapMutations({
@@ -70,7 +70,7 @@
       },
     },
     beforeMount() {
-      this.reportsByAuthorUuidAction(this.$route.params.id);
+      this.reportsByAuthorNicknameAction(this.$route.params.id);
     },
   
     computed: {
@@ -79,13 +79,9 @@
         }),
       ...mapGetters({
         getReportByUuid: "report/getReportByUuid",
-        reportsByAuthorUuid: "report/reportsByAuthorUuid",
+        reportsByAuthorNickname: "report/reportsByAuthorNickname",
       }),
     },
   };
 
-
   </script>
-  
-  <style></style>
-  

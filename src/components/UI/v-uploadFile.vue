@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <div class="large-12 medium-12 small-12 cell">
+      <div>
         <label>
           <MyInput  type="file" id="file" ref="file" @change="$emit('handleFileUpload')"/>
         </label>

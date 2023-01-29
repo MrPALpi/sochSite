@@ -1,15 +1,12 @@
 <template>
   <div class="post">
     <div>
-      <!-- <div class="imgDocument"> -->
+      
         <MyButton id="download" @click="download">
-          <img class="imgDocument" :src="require('./picthers/file.svg')" alt="скачать" />
+          <img class="imgDocument" :src="require('../picthers/file.svg')" alt="скачать" />
         </MyButton>
 
-        <!-- <a v-bind:href="`roma/api/get_file/`+report.path"  target="_ blank">
-                    <img :src="require('./picthers/file.svg')" alt="Панда" >
-                </a> -->
-      <!-- </div> -->
+
       <div class="reportInfo">
       <div ><strong> Название: </strong> {{ report.title }}</div>
       <div ><strong> Предмет: </strong> {{ report.subject }}</div>
@@ -18,7 +15,7 @@
       <div ><strong> Автор: </strong> {{ report.author.name }}</div>
     </div>
     </div>
-    <!-- $router.push(`reports/${report.doc_uuid}`)" -->
+   
     <div class="post_btns">
       <MyButton @click="$router.push(`/reports/${report.doc_uuid}`)">
         Открыть
@@ -30,7 +27,7 @@
     </div>
   </div>
 </template>
-<!-- стиль кнопок раньше style="margin-left: 5px; margin-top:5px;" -->
+
 <script>
 import { mapActions, mapState } from "vuex";
 
@@ -50,13 +47,33 @@ export default {
     },
   },
   methods: {
-    download(){
+    // download(){
+    //   if(this.globalAuthor){ 
+    //   window.open(`/api/get_file/${this.report.path}`, '_blank');
+    //   }
+    //   else{
+    //     alert("У вас недостаточно прав, пожалуйста авторизируйтесь")
+    //   }
+    // },
+    async download(){
       if(this.globalAuthor){ 
-      window.open(`/api/get_file/${this.report.path}`, '_blank');
+      const response = await fetch(`/api/get_file/${this.report.path}`);
+        if (response.status === 200){
+          console.log(this.report)
+          const blob = await response.blob();
+          console.log(blob);
+          const downloadURL=window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = downloadURL;
+          link.download = this.report.title + this.report.path.slice(this.report.path.indexOf("."),);
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        }
       }
       else{
         alert("У вас недостаточно прав, пожалуйста авторизируйтесь")
-      }
+      }  
     },
     canChangeReport(report) {
       if (this.globalAuthor) {

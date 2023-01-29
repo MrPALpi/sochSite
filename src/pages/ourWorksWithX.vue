@@ -7,7 +7,7 @@
       @update:value="setSearchQuery"
       placeholder="Поиск..."
     >
-    <!-- $store.commit('setSearchQuery',searchQuery) -->
+      <!-- $store.commit('setSearchQuery',searchQuery) -->
     </MyInput>
 
     <div class="app_btns">
@@ -16,7 +16,8 @@
       <MySelect
         :model-value="selectedSort"
         @update:model-value="setSelectedSort"
-        :options="sortOptions">
+        :options="sortOptions"
+      >
       </MySelect>
     </div>
 
@@ -31,7 +32,7 @@
       />
     </MyDialog>
 
-    <ReportList
+    <ReportList 
       :reports="sortedAndSearchedReports"
       @OpenChangeReport="OpenChangeReport"
       v-if="!isReportLoading"
@@ -42,9 +43,9 @@
 </template>
 
 <script>
-import ReportForm from "@/components/ReportForm.vue";
-import ReportList from "@/components/ReportList.vue";
-import ChangeReport from "@/components/ChangeReport.vue";
+import ReportForm from "@/components/ReportComponents/ReportForm.vue";
+import ReportList from "@/components/ReportComponents/ReportList.vue";
+import ChangeReport from "@/components/ReportComponents/ChangeReport.vue";
 import MyDialog from "@/components/UI/MyDialog.vue";
 import MyButton from "@/components/UI/MyButton.vue";
 import MySelect from "@/components/UI/MySelect.vue";
@@ -64,14 +65,11 @@ export default {
     return {
       dialigVisible: false,
       changeVisible: false,
+      subRun:false,
       // file: '',
     };
   },
   methods: {
-    // onUpdate(){
-    //   console.log(this.$store);
-    // },
-
     ...mapMutations({
       changeReportMutations: "report/changeReport",
       setPage: "report/setPage",
@@ -83,6 +81,7 @@ export default {
       loadMoreReports: "report/loadMoreReports",
       fetchReports: "report/fetchReports",
       // changeReportAPI: "report/changeReportAPI"
+      subscribe: "report/subscribeRun",
     }),
 
     createReport(Report) {
@@ -94,7 +93,7 @@ export default {
     },
 
     OpenChangeReport(Report) {
-        console.log("Матвей хочет видеть логи",Report);
+      console.log("Матвей хочет видеть логи", Report);
       this.mustChangeReport = Report;
       this.changeVisible = true;
     },
@@ -104,12 +103,15 @@ export default {
     changeReport(Report) {
       this.changeVisible = false;
       this.changeReportMutations(Report);
-
     },
   },
   mounted() {
     this.fetchReports();
+    // this.subscribe();
+    // this.subscribeRun();
   },
+  
+  
   computed: {
     ...mapState({
       reports: (state) => state.report.reports,

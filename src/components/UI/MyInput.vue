@@ -15,9 +15,7 @@ export default{
     }
 }
 </script>
-export default:{
-    name: "MyInput"
-}
+
 <style>
 
 </style>

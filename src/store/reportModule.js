@@ -3,7 +3,9 @@ import axios from "axios";
 export const reportModule = {
   state: () => ({
     reports: [],
-    mustChangeReport: {
+    subRun:false,
+    stopSubRun:false,
+    openedReport: {
       title: "",
       path: "",
       author: "",
@@ -29,6 +31,7 @@ export const reportModule = {
   }),
   getters: {
     getReportByUuid: (state) => (doc_uuid) => {
+      
       return state.reports.find(
         (reportMass) => reportMass.doc_uuid === doc_uuid
       );
@@ -44,9 +47,9 @@ export const reportModule = {
       );
     },
 
-    reportsByAuthorUuid: (state) => (uuid) => {
+    reportsByAuthorNickname: (state) => (nickname) => {
       return [...state.reports].filter((Report) =>
-        Report.author.uuid.includes(uuid)
+        Report.author.nickname.includes(nickname)
       );
     },
 
@@ -63,17 +66,40 @@ export const reportModule = {
     },
   },
   mutations: {
+    setStopSubRun(state, stopRun){
+      state.stopSubRun = stopRun;
+    },
+    setSubRun(state, run){
+      state.subRun = run;
+    },
     setGlobalAuthor(state, author) {
       state.globalAuthor = author;
     },
     setReports(state, reports) {
       state.reports = reports;
     },
+    setReportsFromSide(state,reports){
+      // state.reports = [...new Set(reports.forEach(elem => state.reports.push(elem)))];
+
+      const ids = new Set(state.reports.map(o => o.doc_uuid)); 
+      state.reports.splice(Infinity, 0,
+        ...reports.filter(report => !ids.has(report.doc_uuid))
+      ); 
+      // state.reports.concat(reports.filter(x => state.reports.includes(x)));
+
+      // if (state.reports.length < reports.length){
+      //   state.reports = state.reports.filter((p) => p !== report);
+      // }
+      // state.reports = reports;
+      // state.reports = [...state.reports, ...reports]
+      // state.reports = state.reports.concat(reports);
+
+    },
     setLoading(state, bool) {
       state.isReportLoading = bool;
     },
-    setMustChangeReport(state, mustChangeReport) {
-      state.mustChangeReport = mustChangeReport;
+    setOpenedReport(state,openedReport) {
+      state.openedReport = openedReport;
     },
     setSelectedSort(state, selectedSort) {
       state.selectedSort = selectedSort;
@@ -86,7 +112,6 @@ export const reportModule = {
       state.totalPage = totalPages;
     },
     removeReport(state, report) {
-     
       state.reports = state.reports.filter((p) => p !== report);
     },
     changeReport(state, report) {
@@ -124,7 +149,7 @@ export const reportModule = {
           .get(`/api/get?user.uuid=${uuid}`)
           .then(
             (response) => (
-              console.log("ЫЫЫ", response["data"]["users"][0]),
+              // console.log("ЫЫЫ", response["data"]["users"][0]),
               commit("setGlobalAuthor", response["data"]["users"][0])
             )
           );
@@ -132,19 +157,20 @@ export const reportModule = {
         console.log("e");
       }
     },
-    async reportsByAuthorUuidAction({ commit, state }, uuid) {
+    async reportsByAuthorNicknameAction({ commit, state }, nickname) {
       if (
         (typeof state.reports !== "undefined") &
         (state.reports.length !== 0)
       ) {
-        console.log("Известен", state.reports);
+        console.log("очтётов есть");
+        return;
       } else {
-        console.log("не известен");
+        console.log("очтётов нет, но сейчас будут");
         try {
           commit("setLoading", true);
 
           const response = await axios.get(
-            `/api/get?doc.author.uuid=${uuid}`
+            `/api/get?doc.author.nickname=${nickname}`
           );
           commit("setReports", response["data"]["docs"]);
         } catch (e) {
@@ -159,9 +185,10 @@ export const reportModule = {
         (typeof state.reports !== "undefined") &
         (state.reports.length !== 0)
       ) {
-        console.log("Известен", state.reports);
+        // console.log("Известен", state.reports);
+        return;
       } else {
-        console.log("не известен");
+        // console.log("не известен");
         try {
           commit("setLoading", true);
 
@@ -178,12 +205,12 @@ export const reportModule = {
       try {
         let response = await axios.get(`/auth?nickname=${nickName}`);
         // this.$router.push('/store');
-        while (response["data"]["result"] == false) {
-          setTimeout(500);
+        console.log('',response["data"]["Wait"]);
+        while (response["data"]["Wait"]) {
+          setTimeout(1000);
           response = await axios.get(`/auth?nickname=${nickName}`);
-          // console.log(response['data']['user']);
         }
-        commit("setGlobalAuthor", response["data"]["user"]);
+        commit("setGlobalAuthor", response["data"]["Ok"]);
         dispatch("addLocalStorage");
       } catch (e) {
         console.log(e);
@@ -211,7 +238,15 @@ export const reportModule = {
         commit("setLoading", false);
       }
     },
+    clearLocalStorage({commit}){
+      localStorage.clear();
+      let cookies = document.cookie;
+      document.cookie =  'session_token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      console.log(cookies);
+      commit("setGlobalAuthor", '');
+    },
     addLocalStorage({ getters }) {
+      
       localStorage.setItem("user", JSON.stringify(getters.globalAuthor));
     },
     localStorageCheck({ commit }) {
@@ -228,6 +263,38 @@ export const reportModule = {
         console.log(e);
       }
     },
+    async subscribe({state, commit, dispatch}) {
+      if (!state.stopSubRun){
+        let response =  await axios.get("/api/get?all_docs");
+  
+        if (response.status == 502) {
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          await dispatch("subscribe");
+        } else if (response.status != 200) {
+        
+          console.log(response.statusText);
+        
+          await new Promise((resolve) => setTimeout(resolve, 10000));
+          await dispatch("subscribe");
+        } else {
+          // Получим и покажем сообщение
+          let message = await response["data"]["docs"];
+          commit("setReportsFromSide", message);
+          console.log(message);
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          await dispatch("subscribe");
+        }
+      }
+    },
+    subscribeRun({state,commit, dispatch}){
+      commit("setStopSubRun", false);
+      if (!state.subRun){
+        dispatch("subscribe");
+        commit("setSubRun", true);
+    }
   },
+  },
+  
+  
   namespaced: true,
 };

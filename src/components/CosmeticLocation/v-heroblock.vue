@@ -2,7 +2,7 @@
 <div class="heroblock-container">
     <section  class="hero" 
     :style="`background-image:url(`+imgPath+`);`">
-    <slot>
+    <slot >
         
     </slot>
     <!-- <div class="heroText">
@@ -38,14 +38,24 @@ export default {
   /* background-image: url('https://i.ibb.co/PM6cMBn/image.png'); */
   background-size: cover;
   background-position: center center;
-
+    
     /* margin-bottom:20px;  */
-    padding: 40px 50px 40px 50px;
+    /* padding: 40px 50px 40px 50px; */
+    /* width: 100%; */
+    
+    text-align: center;
     width: 100%;
+    /* height: calc(var(--variable-height) - 50px); */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
 }
 .heroblock-container{
     /* box-shadow: 10 15px 0px 2px #6BA5FA */
+    min-height: 100vh;
+
 
 }
 /* .heroText{ */

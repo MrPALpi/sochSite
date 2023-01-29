@@ -1,11 +1,12 @@
 <template>
   <div class ="UserCard">
-        <div  class="imgCardWrap">
+        <div v-scrolleffect class="imgCardWrap userCardHidden">
             <img class="imgCard"  v-bind:src="`/api/get_file/`+card.avatar" alt="">
         </div>
-        <div class="cardInfo" >
-            <h4>{{card.name}}</h4>
-            <h4>Роль: {{card.role}}</h4>
+        <div v-scrolleffect class="cardInfo flying_TextY" >
+            <!-- <h4 style="word-break:break-all;">Имя: {{card.name}}</h4> -->
+            <h4 style="word-break:break-all;">Nick: {{card.nickname}}</h4>
+            <h4 style="word-break:break-all;">Роль: {{card.role}}</h4>
         </div>
 
         
@@ -29,15 +30,8 @@ export default {
 <style>
 
 .UserCard{
-    
-    /* flex-basis: 25%; */
-    /* position: relative; */
-    /* justify-content:space-between; */
-    /* --width: 13%;
-    width: var(--width);
-    height: auto; */
-    
-    
+    width: 152px;
+    margin: 15px 0 0 0;
 }
 .imgCardWrap{
   
@@ -45,17 +39,11 @@ export default {
   overflow: hidden;
   width: 132px;
   height: 132px;
-  /* width: 100%; */
-  /* height: 62.4%; */
+
   margin:auto;
 }
 
 .imgCard{
-    
-  /* width: auto;
-  height: 100%;
-  margin: 0 auto; */
-
   width:100%;
   height:100%;
   object-fit: cover;
@@ -65,5 +53,6 @@ export default {
     font-style: normal;
     text-align: center;
     color: #fff;
+    word-break:break-all;
 }
 </style>

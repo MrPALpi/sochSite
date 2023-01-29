@@ -29,11 +29,11 @@ const routes =  [
     //     component: ourWorksWithX
     // },
     {
-        path: '/account',
+        path: '/auth',
         component: AuthPage
     },
     {
-        path: '/mypage/:id',
+        path: '/:id',
         component: myAccount
     },
     

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import MyInput from "./UI/MyInput.vue";
+import MyInput from "../UI/MyInput.vue";
 
 export default {
     data() {

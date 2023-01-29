@@ -1,5 +1,5 @@
 <template>
-    
+    <div ref="observer">
      <div v-if="reports.length>0">
         <div>
         <!-- <h3>Отчёты</h3> -->
@@ -15,12 +15,12 @@
         <div v-else style="color: #fff; font-family: 'Roboto'; margin-top: 50px;">
             <h2>Отчётов пока нет</h2>
         </div>
-    
+    </div>
 </template>
 
 <script>
-
-import ReportItem from "@/components/ReportItem.vue";
+import { mapActions } from "vuex";
+import ReportItem from "@/components/ReportComponents/ReportItem.vue";
 export default{
     components : {ReportItem},
     props:{
@@ -29,7 +29,25 @@ export default{
             required: true
         }
     },
-    mounted() {
-},
+    methods:{
+        ...mapActions({
+      subscribe: "report/subscribeRun",
+    }),
+    },
+    mounted(){
+        const options = {
+                rootMargin: '0px',
+                threshold: 0.01
+            }
+            const callback = (entries) => {
+                
+                if (entries[0].isIntersecting ){
+                    this.subscribe();
+                }
+            };
+            const observer = new IntersectionObserver(callback, options);
+            observer.observe(this.$refs.observer);
+    }
+   
 }
 </script>

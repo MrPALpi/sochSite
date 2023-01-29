@@ -7,11 +7,11 @@
       />
     </MyDialog>
   </div>
-  <div class="gridReport" v-if="getReportByUuid(this.$route.params.id)">
+  <div class="gridReport" v-if="this.getReportByUuid(this.$route.params.id)">
     <div class="box2">
       <ChangeReport
         
-        :mustChangeReport="getReportByUuid(this.$route.params.id)"
+        :mustChangeReport="this.getReportByUuid(this.$route.params.id)"
         @changeReport="changeReport"
       />
     </div>
@@ -30,18 +30,18 @@
 </template>
 
 <script>
-import ChangeReport from "@/components/ChangeReport.vue";
-import MyPage from "@/components/MyPage.vue";
-import ReportList from "@/components/ReportList.vue";
+import ChangeReport from "@/components/ReportComponents/ChangeReport.vue";
+import MyPage from "@/components/CosmeticLocation/MyPage.vue";
+import ReportList from "@/components/ReportComponents/ReportList.vue";
 import MyDialog from "@/components/UI/MyDialog.vue";
-import { mapGetters, mapActions,mapMutations} from "vuex";
+import {mapGetters, mapActions, mapMutations} from "vuex";
 
 export default {
   data() {
     return {
       mustChangeReport: "",
       changeVisible: false,
-      // file: '',
+      resultFunc:'',
     };
   },
   components: {
@@ -53,26 +53,28 @@ export default {
   methods: {
     ...mapActions({
       reportTest: "report/reportTest",
-      // changeReportMutations: "report/changeReport",
+    
     }),
     ...mapMutations({
       changeReportMutations: "report/changeReport",
     }),
     OpenChangeReport(Report) {
-      console.log("Матвей хочет видеть логи", Report);
       this.mustChangeReport = Report;
       this.changeVisible = true;
     },
 
-
     changeReport(Report) {
-      console.log("Сработало изменение");
-      // this.changeVisible = false;
+      // console.log("Сработало изменение");
       this.changeReportMutations(Report);
     },
   },
-  beforeMount() {
+
+  created(){
     this.reportTest();
+  },
+
+  mounted(){
+    this.resultFunc = this.getReportByUuid(this.$route.params.id);
   },
 
   computed: {

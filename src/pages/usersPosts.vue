@@ -45,9 +45,9 @@
 </template>
 
 <script>
-import PostForm from '@/components/PostForm.vue';
-import PostList from '@/components/PostList.vue';
-import ChangeForm from '@/components/ChangeForm.vue';
+import PostForm from '@/components/PostComponents/PostForm.vue';
+import PostList from '@/components/PostComponents/PostList.vue';
+import ChangeForm from '@/components/PostComponents/ChangeForm.vue';
 import MyDialog from '@/components/UI/MyDialog.vue';
 import MyButton from '@/components/UI/MyButton.vue';
 
